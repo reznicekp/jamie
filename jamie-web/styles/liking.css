@@ -1,0 +1,36 @@
+liking {
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+liking span {
+    color: #ddd;
+    display: block;
+    min-width: 30px;
+}
+
+liking:hover span {
+    color: #000;
+}
+
+liking sup,
+liking sub {
+    color: #ddd;
+    cursor: pointer;
+    position: absolute;
+    right: 9px;
+    top: 0;
+}
+
+liking sub {
+    top: 10px;
+}
+
+liking:hover sup {
+    color: #5cb85c;
+}
+
+liking:hover sub {
+    color: #d9534f;
+}

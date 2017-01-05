@@ -1,0 +1,27 @@
+<span editable-text="liking.restaurant.name" e-name="name" e-form="restaurantForm" title="Distance {{liking.restaurant.distance}} minutes" onbeforesave="checkRestaurantName($data)">
+    {{liking.restaurant.name}}
+</span>
+<span editable-number="liking.restaurant.distance" e-name="distance" e-form="restaurantForm" e-min="1" ng-show="restaurantForm.$visible" e-title="Distance">
+    {{liking.restaurant.distance}}
+</span>
+
+<form editable-form name="restaurantForm" class="form-buttons form-inline restaurantForm"
+      onbeforesave="saveRestaurant($data, liking.restaurant.id)"
+      ng-show="restaurantForm.$visible" shown="insertedRestaurant == liking.restaurant">
+    <button type="submit" ng-disabled="restaurantForm.$waiting" class="btn btn-primary btn-xs">
+        <span class="glyphicon glyphicon-ok"></span>
+    </button>
+    <button type="button" ng-disabled="restaurantForm.$waiting" class="btn btn-default btn-xs"
+            ng-click="restaurantForm.$cancel(); cancelAddRestaurant(liking.restaurant)">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+</form>
+
+<div class="restaurantButtons" ng-show="!restaurantForm.$visible">
+    <button type="button" class="btn btn-primary btn-xs" ng-click="restaurantForm.$show()">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </button>
+    <button type="button" class="btn btn-danger btn-xs" ng-click="removeRestaurant($index)">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</div>

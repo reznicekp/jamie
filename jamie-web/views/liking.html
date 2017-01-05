@@ -1,0 +1,7 @@
+<span>{{liking.value}}</span>
+<sup title="Increase" ng-click="changeLiking(liking, 1)" ng-show="liking.value < 2 && insertedDeveloper != developer">
+    <small class="glyphicon glyphicon-arrow-up"></small>
+</sup>
+<sub title="Decrease" ng-click="changeLiking(liking, -1)" ng-show="liking.value > -2 && insertedDeveloper != developer">
+    <small class="glyphicon glyphicon-arrow-down"></small>
+</sub>

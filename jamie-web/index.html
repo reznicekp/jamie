@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html lang="en" data-ng-app="jamieApp">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/icon16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/icon32.png">
+        <link rel="stylesheet" type="text/css" href="styles/lib/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/lib/xeditable.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/weather.css">
+        <link rel="stylesheet" type="text/css" href="styles/liking.css">
+        <link rel="stylesheet" type="text/css" href="styles/developer-restaurant.css">
+        <link rel="stylesheet" type="text/css" href="styles/daily-preferences.css">
+        <script type="text/javascript" src="scripts/lib/angular.min.js"></script>
+        <script type="text/javascript" src="scripts/lib/xeditable.min.js"></script>
+        <script type="text/javascript" src="scripts/directives/weather.js"></script>
+        <script type="text/javascript" src="scripts/directives/restaurant.js"></script>
+        <script type="text/javascript" src="scripts/directives/developer.js"></script>
+        <script type="text/javascript" src="scripts/directives/liking.js"></script>
+        <script type="text/javascript" src="scripts/directives/daily-preference.js"></script>
+        <script type="text/javascript" src="scripts/jamie.js"></script>
+        <title>Jamie</title>
+    </head>
+
+    <body class="container" data-ng-controller="MainController" data-ng-init="initApp()">
+        <header>
+            <h1 class="page-header">Jamie <small>Where to go for lunch?</small></h1>
+            <weather></weather>
+        </header>
+
+        <table class="table table-striped table-hover table-condensed">
+            <tr>
+                <th>Joining developers</th>
+                <th ng-repeat="liking in developers[0].likings">
+                    <restaurant></restaurant>
+                </th>
+            </tr>
+            <tr ng-repeat="developer in developers">
+                <td>
+                    <developer></developer>
+                </td>
+                <td ng-repeat="liking in developer.likings">
+                    <liking></liking>
+                </td>
+            </tr>
+        </table>
+
+        <button class="btn btn-primary" ng-disabled="calculationInProgress" ng-click="calculatePreferences()">Where to go?</button>
+        <button class="btn btn-default" ng-click="addDeveloper()">New developer</button>
+        <button class="btn btn-default" ng-click="addRestaurant()">New restaurant</button>
+
+        <div class="daily-preferences">
+            <div class="loader" ng-show="calculationInProgress"></div>
+            <daily-preference class="row" ng-hide="calculationInProgress"
+                              ng-repeat="dailyPreference in dailyPreferences"></daily-preference>
+        </div>
+    </body>
+</html>

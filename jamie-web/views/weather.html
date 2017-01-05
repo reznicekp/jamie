@@ -1,0 +1,12 @@
+<div>
+    <strong><small>Today</small></strong>
+    <img ng-src="http://openweathermap.org/img/w/{{weatherForecastNow.weather[0].icon}}.png"
+         title="rain {{weatherForecastNow.rain}}&#13;snow {{weatherForecastNow.snow}}">
+    <small>{{weatherForecastNow.main.temp}} &deg;C<br>{{weatherForecastNow.weather[0].description}}</small>
+</div>
+<div>
+    <strong><small>Tomorrow</small></strong>
+    <img ng-src="http://openweathermap.org/img/w/{{weatherForecastTomorrow.weather[0].icon}}.png"
+         title="rain {{weatherForecastTomorrow.rain}}&#13;snow {{weatherForecastTomorrow.snow}}">
+    <small>{{weatherForecastTomorrow.main.temp}} &deg;C<br>{{weatherForecastTomorrow.weather[0].description}}</small>
+</div>

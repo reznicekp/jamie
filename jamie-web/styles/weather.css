@@ -1,0 +1,28 @@
+weather {
+    float: right;
+    margin-bottom: 50px;
+    margin-top: -85px;
+}
+
+weather div {
+    display: inline-block;
+}
+
+weather div + div {
+    margin-left: 20px;
+}
+
+weather strong {
+    display: block;
+    text-align: center;
+}
+
+weather img {
+    float: right;
+}
+weather small {
+    display: inline-block;
+    position: relative;
+    text-align: right;
+    top: 7px;
+}

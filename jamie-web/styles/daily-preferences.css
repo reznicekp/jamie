@@ -1,0 +1,41 @@
+.loader {
+    border: 3px solid #f3f3f3;
+    border-top-color: #337ab7;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-left: 290px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+daily-preference {
+    display: block;
+}
+
+.daily-preferences {
+    margin-top: 40px;
+}
+
+.progress-bar {
+    min-width: 3em;
+}
+
+.progress-bar-default {
+    background-color: #afafaf;
+}
+
+daily-preference .history-day {
+    position: relative;
+    top: -5px;
+    opacity: 0.1;
+    transition: opacity 0.1s linear;
+}
+
+daily-preference:hover .history-day {
+    opacity: 1;
+}

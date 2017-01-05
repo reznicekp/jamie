@@ -1,0 +1,32 @@
+<span editable-text="developer.name" e-name="name" e-form="developerForm" e-title="Name" onbeforesave="checkDeveloperName($data)">
+    {{developer.name}}
+</span>
+<span editable-checkbox="developer.usuallyJoins" e-name="usuallyJoins" e-form="developerForm" ng-show="developerForm.$visible">
+    {{developer.usuallyJoins}}
+</span>
+
+<form editable-form name="developerForm" class="form-buttons form-inline developerForm"
+      onbeforesave="saveDeveloper($data, developer.id)"
+      ng-show="developerForm.$visible" shown="insertedDeveloper == developer">
+    <button type="submit" ng-disabled="developerForm.$waiting" class="btn btn-primary btn-xs">
+        <span class="glyphicon glyphicon-ok"></span>
+    </button>
+    <button type="button" ng-disabled="developerForm.$waiting" class="btn btn-default btn-xs"
+            ng-click="developerForm.$cancel(); cancelAddDeveloper(developer)">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+</form>
+
+<div class="developerButtons" ng-show="!developerForm.$visible">
+    <button type="button" class="btn btn-primary btn-xs" ng-click="developerForm.$show()">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </button>
+    <button type="button" class="btn btn-danger btn-xs" ng-click="removeDeveloper($index)">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</div>
+
+<div class="switch">
+    <input id="{{'switch' + developer.id}}" type="checkbox" ng-model="developer.usuallyJoins"/>
+    <label for="{{'switch' + developer.id}}" class="label-primary"></label>
+</div>

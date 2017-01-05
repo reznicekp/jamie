@@ -1,0 +1,15 @@
+<span class="col-sm-3 text-right" ng-if="todaysChoice.restaurant.id != dailyPreference.id">{{dailyPreference.name}}</span>
+<span class="col-sm-3 text-right" ng-if="todaysChoice.restaurant.id == dailyPreference.id"><strong>{{dailyPreference.name}}</strong></span>
+
+<div class="col-sm-5">
+    <div class="progress">
+        <div class="progress-bar" style="width: {{dailyPreference.score}}%;"
+             ng-class="{'progress-bar-default' : todaysChoice && todaysChoice.restaurant.id != dailyPreference.id}">
+            {{dailyPreference.score}} %
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-2 history-day">
+    <button class="btn btn-primary btn-sm" ng-click="chooseRestaurant(dailyPreference)">Choose</button>
+</div>
