@@ -1,7 +1,7 @@
 (function () {
     var app = angular
         .module('jamieApp', ['xeditable', 'weatherDirective', 'restaurantDirective', 'developerDirective', 'likingDirective', 'dailyPreferenceDirective'])
-        .constant('SERVER_URL', 'http://127.0.0.1:8080');
+        .constant('SERVER_URL', 'http://dominion-of-the-bytes.com/jamie');
 
     app.controller('MainController', ['$scope', '$http', '$log', 'SERVER_URL', function ($scope, $http, $log, SERVER_URL) {
         $scope.developers = [];
