@@ -29,7 +29,7 @@ public class DailyPreferenceService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DailyPreferenceService.class);
 
-	private final int CHECKED_DAYS_IN_HISTORY = 4;
+	private final int CHECKED_DAYS_IN_HISTORY = 8;
 	private final int MIN_COMFORTABLE_TEMPERATURE = 20;
 	private final int MAX_COMFORTABLE_TEMPERATURE = 25;
 
@@ -87,7 +87,14 @@ public class DailyPreferenceService {
 	private void initializeScore(List<DeveloperDBO> developers) {
 		for (DeveloperDBO developer : developers) {
 			for (LikingDBO liking : developer.getLikings()) {
-				liking.getRestaurant().setScore(liking.getRestaurant().getScore() + liking.getValue());
+				double newScore;
+				if (liking.getValue() == -2) {
+					// if somebody strongly dislikes a restaurant it is strongly suppressed
+					newScore = liking.getRestaurant().getScore() + (10 * liking.getValue());
+				} else {
+					newScore = liking.getRestaurant().getScore() + liking.getValue();
+				}
+				liking.getRestaurant().setScore(newScore);
 			}
 		}
 		printScore("Score initialized", developers);
@@ -183,7 +190,7 @@ public class DailyPreferenceService {
 		}
 		LOGGER.info("Rain: now " + rainNow.getThreeHours() + ", tommorow " + rainTomorrow.getThreeHours());
 
-		adjustScore(developers, rainTomorrow.getThreeHours() - rainNow.getThreeHours(), 1, "rain");
+		adjustScore(developers, rainTomorrow.getThreeHours() - rainNow.getThreeHours(), 0.1, "rain");
 	}
 
 	/**
@@ -212,7 +219,7 @@ public class DailyPreferenceService {
 		}
 		LOGGER.info("Snow: now " + snowNow.getThreeHours() + ", tommorow " + snowTomorrow.getThreeHours());
 
-		adjustScore(developers, snowTomorrow.getThreeHours() - snowNow.getThreeHours(), 2, "snow");
+		adjustScore(developers, snowTomorrow.getThreeHours() - snowNow.getThreeHours(), 0.1, "snow");
 	}
 
 	/**
@@ -253,12 +260,12 @@ public class DailyPreferenceService {
 				|| (isTemperatureNowCold && isTemperatureTomorrowWarm)
 				|| (isTemperatureNowWarm && isTemperatureTomorrowCold)) {
 			// higher temperature better
-			adjustScore(developers, temperatureNow - temperatureTomorrow, 0.25, "temperature");
+			adjustScore(developers, temperatureNow - temperatureTomorrow, 0.1, "temperature");
 		} else if ((isTemperatureNowComfortable && isTemperatureTomorrowWarm)
 				|| (isTemperatureNowWarm && isTemperatureTomorrowComfortable)
 				|| (isTemperatureNowWarm && isTemperatureTomorrowWarm)) {
 			// lower temperature better
-			adjustScore(developers, temperatureTomorrow - temperatureNow, 0.25, "temperature");
+			adjustScore(developers, temperatureTomorrow - temperatureNow, 0.1, "temperature");
 		}
 	}
 
